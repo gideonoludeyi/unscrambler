@@ -1,19 +1,24 @@
 import nltk  # type: ignore
 from nltk.downloader import download  # type: ignore
 
-download('words', download_dir='./.nltk_data')
+NLTK_DATA = './.nltk_data'
+
+download('words', download_dir=NLTK_DATA)
+nltk.data.path.append(NLTK_DATA)  # tell nltk to search for nltk dataset here
 
 while True:
-    letters = input("List of words :\t").lower()
+    letters = list(input("List of characters :\t").replace(' ', '').lower())
 
     puzzle_letters = nltk.FreqDist(letters)
-    obligatory = list(letters)
     wordlist = nltk.corpus.words.words()
 
-    results = set([w for w in wordlist if 2 < len(w) <= len(letters)
-                   and nltk.FreqDist(w) <= puzzle_letters
-                   for o in obligatory
-                   if o in w])
+    results = set()
+    for word in wordlist:
+        within_length_range = 2 < len(word) <= len(letters)
+        if within_length_range and nltk.FreqDist(word) <= puzzle_letters:
+            for letter in letters:
+                if letter in word:
+                    results.add(word)
 
     print(sorted(results))
 
