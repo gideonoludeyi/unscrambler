@@ -1,5 +1,7 @@
 import nltk  # type: ignore
-nltk.download('words')
+from nltk.downloader import download  # type: ignore
+
+download('words', download_dir='./.nltk_data')
 
 while True:
     letters = input("List of words :\t").lower()
