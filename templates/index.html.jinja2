@@ -1,0 +1,25 @@
+{% extends "layout.html.jinja2" %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    <h1>Unscrambler</h1>
+    <p>Generate valid English words from alphabet characters</p>
+
+    <form action="/unscramble" method="get">
+        <div>
+            <input
+                type="text"
+                name="chars"
+                id="chars"
+                required
+                minlength="2"
+                autofocus
+                placeholder="Enter alphabet characters..."
+            />
+            <br />
+        </div>
+        <button type="submit">Unscramble</button>
+    </form>
+{% endblock %}
+

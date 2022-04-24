@@ -1,0 +1,11 @@
+{% extends "layout.html.jinja2" %}
+
+{% block title %} {{ chars }} {% endblock %}
+
+{% block content %}
+    <h1>Results for "{{ chars }}"</h1>
+    {% for length, group in result %}
+        <h3>Length: {{ length }}</h3>
+        <p>{{ ', '.join(group) }}</p>
+    {% endfor %} 
+{% endblock %}
