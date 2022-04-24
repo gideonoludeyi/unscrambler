@@ -11,7 +11,7 @@ nltk.data.path.append(NLTK_DATA)
 wordlist = nltk.corpus.words.words()
 
 
-def unscramble(chars: str) -> list[str]:
+def unscramble(chars: str) -> set[str]:
     chars = chars.replace(' ', '').lower()
 
     puzzle_letters = nltk.FreqDist(chars)
@@ -24,4 +24,4 @@ def unscramble(chars: str) -> list[str]:
                 if letter in word:
                     results.add(word)
 
-    return sorted(results, key=len, reverse=True)
+    return results

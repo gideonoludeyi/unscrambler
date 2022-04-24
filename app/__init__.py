@@ -20,6 +20,6 @@ def index(request: Request):
 
 @app.get('/unscramble', response_class=HTMLResponse)
 def result(request: Request, chars: str):
-    unscrambled = unscramble(chars)
-    result = groupby(unscrambled, key=len)
-    return templates.TemplateResponse('unscramble.html.jinja2', {'request': request, 'chars': chars, 'result': result})
+    unscrambled = sorted(unscramble(chars), key=len, reverse=True)
+    groups = groupby(unscrambled, key=len)
+    return templates.TemplateResponse('unscramble.html.jinja2', {'request': request, 'chars': chars, 'result': groups})
