@@ -1,8 +1,10 @@
 import nltk  # type: ignore
 from nltk.downloader import download  # type: ignore
 
-download('words', download_dir='./.nltk_data')
-nltk.data.path.append('./.nltk_data')
+NLTK_DATA = './.nltk_data'
+
+download('words', download_dir=NLTK_DATA)
+nltk.data.path.append(NLTK_DATA)
 
 wordlist = nltk.corpus.words.words()
 
