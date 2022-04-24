@@ -1,7 +1,9 @@
+import os
+
 import nltk  # type: ignore
 from nltk.downloader import download  # type: ignore
 
-NLTK_DATA = './.nltk_data'
+NLTK_DATA = os.getenv('NLTK_DATA')
 
 download('words', download_dir=NLTK_DATA)
 nltk.data.path.append(NLTK_DATA)
