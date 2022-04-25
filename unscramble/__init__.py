@@ -1,8 +1,8 @@
 from .base import Vocabulary, WordFilter
 from .compose_filter import ComposeFilter
 from .length_range_filter import LengthRangeFilter
-from .spacy_vocab import SpacyVocab
 from .selection_filter import SelectionFilter
+from .spacy_vocab import SpacyVocab
 
 
 def unscramble(chars: str) -> set[str]:
