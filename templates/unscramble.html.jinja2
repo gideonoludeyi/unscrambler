@@ -3,7 +3,7 @@
 {% block title %} {{ chars }} {% endblock %}
 
 {% block content %}
-    <h1>Results for "{{ chars }}"</h1>
+    <h1>Results for "{{ chars }}" ({{ num_of_words }})</h1>
     {% for length, group in result %}
         <h3>Length: {{ length }}</h3>
         <p>{{ ', '.join(group) }}</p>
