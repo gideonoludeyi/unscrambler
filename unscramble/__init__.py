@@ -1,29 +1,18 @@
 import os
-from collections import Counter
-from typing import Iterable
 
-import nltk  # type: ignore
-from nltk.downloader import download  # type: ignore
+from .base import Vocabulary, WordFilter
+from .length_range_filter import LengthRangeFilter
+from .nltk_vocab import NLTKVocabulary
+from .selection_filter import SelectionFilter
 
 NLTK_DATA = os.getenv('NLTK_DATA')
 
-download('words', download_dir=NLTK_DATA)
-nltk.data.path.append(NLTK_DATA)
-
-wordlist: Iterable[str] = nltk.corpus.words.words()
-
 
 def unscramble(chars: str) -> set[str]:
-    chars = chars.replace(' ', '').lower()
+    length_filter: WordFilter = LengthRangeFilter(
+        minimum=3, maximum=len(chars))
+    character_bound_filter: WordFilter = SelectionFilter(chars)
 
-    puzzle_letters = Counter(chars)
-    required_letters = list(chars)
+    vocab: Vocabulary = NLTKVocabulary(path=NLTK_DATA)
 
-    results = set()
-    for word in wordlist:
-        if 2 < len(word) <= len(chars) and Counter(word) <= puzzle_letters:
-            for letter in required_letters:
-                if letter in word:
-                    results.add(word)
-
-    return results
+    return {word for word in vocab if length_filter.test(word) and character_bound_filter.test(word)}
