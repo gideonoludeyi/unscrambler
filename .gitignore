@@ -1,5 +1,5 @@
 # Application specific
-.nltk_data
+local_data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
