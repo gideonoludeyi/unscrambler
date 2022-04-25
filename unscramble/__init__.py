@@ -13,4 +13,8 @@ def unscramble(chars: str) -> set[str]:
 
     vocab: Vocabulary = SpacyVocab()
 
-    return set(filter(word_filter.test, vocab))
+    return apply_word_filter(vocab, word_filter)
+
+
+def apply_word_filter(vocab: Vocabulary, word_filter: WordFilter) -> set[str]:
+    return {word for word in vocab if word_filter.test(word)}
