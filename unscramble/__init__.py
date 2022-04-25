@@ -1,6 +1,3 @@
-import os
-
-
 from .base import Vocabulary, WordFilter
 from .compose_filter import ComposeFilter
 from .length_range_filter import LengthRangeFilter
