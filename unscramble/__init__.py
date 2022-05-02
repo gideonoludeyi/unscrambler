@@ -1,8 +1,11 @@
+import os
 from .base import Vocabulary, WordFilter
 from .compose_filter import ComposeFilter
 from .length_range_filter import LengthRangeFilter
 from .selection_filter import SelectionFilter
-from .spacy_vocab import SpacyVocab
+from .nltk_vocab import NLTKVocabulary
+
+NLTK_DATA = os.getenv('NLTK_DATA', 'local_data')
 
 
 def unscramble(chars: str) -> set[str]:
@@ -11,7 +14,7 @@ def unscramble(chars: str) -> set[str]:
         SelectionFilter(chars),
     ])
 
-    vocab: Vocabulary = SpacyVocab()
+    vocab: Vocabulary = NLTKVocabulary(path=NLTK_DATA)
 
     return apply_word_filter(vocab, word_filter)
 
